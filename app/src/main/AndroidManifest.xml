@@ -13,11 +13,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/iconhotel"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Help"></activity>
+        <activity android:name=".SecurAccount" />
+        <activity android:name=".Notify" />
+        <activity android:name=".InforCard" />
+        <activity android:name=".History" />
+        <activity android:name=".Change_Infor" />
+        <activity android:name=".Change_Language" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
