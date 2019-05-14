@@ -1,15 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
+    android:orientation="vertical"
+    android:weightSum="10">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="USER"
-        android:textSize="30dp"
-        android:layout_centerInParent="true"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="#5A51EC26"
+        android:orientation="horizontal">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="5dp"
+                android:src="@drawable/luffy" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtUseName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="7"
+            android:text="Nguyễn Thanh Tuấn"
+            android:textAlignment="center"
+            android:textColor="#650275"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgEditInfor"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/iconedit" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/txtLanguage"
+                android:drawableLeft="@drawable/language"
+                android:drawableRight="@drawable/right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Ngôn ngữ"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textAllCaps="false"
+                android:onClick="History"
+                android:gravity="left"/>
+            <Button
+                android:id="@+id/txtHistory"
+                android:drawableLeft="@drawable/history"
+                android:drawableRight="@drawable/right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Lịch sử đặt khách sạn"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textAllCaps="false"
+                 android:gravity="left"/>
+
+            <Button
+                android:id="@+id/txtInforCard"
+                android:drawableLeft="@drawable/money"
+                android:drawableRight="@drawable/right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Thông tin tài khoản thẻ"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:textAllCaps="false"
+                android:textColor="#000"/>
+
+            <Button
+                android:id="@+id/txtNotify"
+                android:drawableLeft="@drawable/notify"
+                android:drawableRight="@drawable/right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Thông báo"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:textAllCaps="false"
+                android:textColor="#000"/>
+            <Button
+                android:id="@+id/txtSecure"
+                android:drawableLeft="@drawable/secure"
+                android:drawableRight="@drawable/right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Bảo mật"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:textAllCaps="false"
+                android:textColor="#000"/>
+            <Button
+                android:id="@+id/txtHelp"
+                android:drawableLeft="@drawable/help"
+                android:drawableRight="@drawable/right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Trung tâm hỗ trợ"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:textAllCaps="false"
+                android:textColor="#000"/>
+
+            <Button
+                android:id="@+id/txtLogout"
+                android:drawableLeft="@drawable/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
+                android:background="#FFF"
+                android:padding="20dp"
+                android:paddingLeft="10dp"
+                android:text="Đăng xuất"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:textAllCaps="false"
+                android:textColor="#000"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

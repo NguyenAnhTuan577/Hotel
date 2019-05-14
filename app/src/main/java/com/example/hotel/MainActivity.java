@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         fm.beginTransaction().hide(active).show(mapFragment).commit();
                         active = mapFragment;
                         return true;
+
                     case R.id.navigation_account:
                         fm.beginTransaction().hide(active).show(userFragment).commit();
                         active = userFragment;
