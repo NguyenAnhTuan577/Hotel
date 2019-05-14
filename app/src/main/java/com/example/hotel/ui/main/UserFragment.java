@@ -1,4 +1,4 @@
-package com.example.hotel;
+package com.example.hotel.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.hotel.Change_Infor;
+import com.example.hotel.Change_Language;
+import com.example.hotel.Help;
+import com.example.hotel.History;
+import com.example.hotel.InforCard;
+import com.example.hotel.Notify;
+import com.example.hotel.R;
+import com.example.hotel.SecurAccount;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     Button txtLanguage,txtHistory,txtInforCard,txtNotify,txtSecure,txtHelp,txtLogout;

@@ -30,13 +30,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBNmPumCOpdIa2oBQDmF6jyxHLSDO9Dd_c" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.detail.HotelDetailActivity"></activity>
     </application>
 
 </manifest>

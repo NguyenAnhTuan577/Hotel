@@ -1,4 +1,4 @@
-package com.example.hotel;
+package com.example.hotel.ui.main;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.hotel.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
