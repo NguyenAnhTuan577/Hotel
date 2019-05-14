@@ -1,4 +1,4 @@
-package com.example.hotel;
+package com.example.hotel.ui.main;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import com.example.hotel.R;
 
 public class MainActivity extends AppCompatActivity {
 

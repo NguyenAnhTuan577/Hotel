@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.HotelDetailActivity">
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:id="@+id/cover"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/convenient_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_h"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/convenient_label"
+            android:text="Tiện nghi hàng đầu"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textColor="@color/FlatBlue"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintTop_toBottomOf="@id/cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/convenient_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_convenient_hotel_detail"
+            tools:layoutManager="GridLayoutManager"
+            tools:spanCount="2"
+            tools:itemCount="2"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:id="@+id/devider0"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#CCC"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/convenient_break"
+            android:text="Tiện nghi phòng nghỉ"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:textColor="@color/FlatBlue"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintTop_toBottomOf="@id/devider0"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:id="@+id/devider1"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/convenient_break"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#CCC"
+            />
+
+        <TextView
+            android:id="@+id/fit_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Phù hợp với"
+            android:textColor="@color/FlatBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintTop_toBottomOf="@id/devider1" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test0"
+            android:text="Doanh nhân"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/fit_label"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test1"
+            android:text="Gia đình"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/test0"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test2"
+            android:text="Tuần trăng mật"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/test1"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:id="@+id/devider2"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#CCC"
+            />
+
+        <TextView
+            android:id="@+id/cate_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Hạng mục khách sạn"
+            android:textColor="@color/FlatBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintTop_toBottomOf="@id/devider2" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test00"
+            android:text="Khách sạn sang trọng"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/cate_label"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test11"
+            android:text="Khách sạn trugn tâm"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/test00"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test22"
+            android:text="Khách sạn dưỡng lão"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/test11"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:id="@+id/devider3"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test22"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#CCC"
+            />
+        <TextView
+            android:id="@+id/harbourage_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Hình thức chỗ ở"
+            android:textColor="@color/FlatBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintTop_toBottomOf="@id/devider3" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/test"
+            android:text="Căn hộ có phục vụ"
+            android:textSize="17sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintTop_toBottomOf="@id/harbourage_label"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:id="@+id/devider4"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/test"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#CCC"/>
+
+        <TextView
+            android:id="@+id/contact_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="Liên hệ"
+            android:textColor="@color/FlatBlue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintTop_toBottomOf="@id/devider4" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/web"
+            android:src="@drawable/ic_insert_link"
+            android:scaleType="centerCrop"
+            android:layout_margin="8dp"
+            android:padding="6dp"
+
+            app:layout_constraintStart_toStartOf="@id/contact_label"
+            app:layout_constraintTop_toBottomOf="@id/contact_label"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/website"
+            android:text="Website"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            app:layout_constraintStart_toEndOf="@id/web"
+            app:layout_constraintTop_toTopOf="@id/web"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/phone"
+            android:src="@drawable/ic_call_black"
+            android:scaleType="centerCrop"
+            android:layout_margin="8dp"
+            android:padding="6dp"
+
+            app:layout_constraintStart_toStartOf="@id/contact_label"
+            app:layout_constraintTop_toBottomOf="@id/web"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/phone1"
+            android:text="0357004545"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            app:layout_constraintStart_toEndOf="@id/phone"
+            app:layout_constraintTop_toTopOf="@id/phone"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/location"
+            android:src="@drawable/ic_location"
+            android:scaleType="centerCrop"
+            android:layout_margin="8dp"
+            android:padding="6dp"
+
+            app:layout_constraintStart_toStartOf="@id/contact_label"
+            app:layout_constraintTop_toBottomOf="@id/phone"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/location1"
+            android:text="227 P4,Q5,TP HCM"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:padding="6dp"
+            app:layout_constraintStart_toEndOf="@id/location"
+            app:layout_constraintTop_toTopOf="@id/location"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        android:tint="@android:color/white"
+        android:padding="16dp"
+        android:layout_margin="6dp"
+        />
+</FrameLayout>
