@@ -13,11 +13,13 @@ import android.view.ViewGroup;
 
 import com.example.hotel.R;
 import com.example.hotel.model.Hotel;
+import com.example.hotel.ui.search.SearchActivity;
 import com.example.hotel.ui.detail.HotelDetailActivity;
 import com.example.hotel.ui.list_hotel.HotelAdapter;
 import com.example.hotel.ui.list_hotel.ItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,13 +65,23 @@ public class HomeFragment extends Fragment implements ItemClickListener {
 
     private void refreshData() {
         ArrayList<Hotel> data= new ArrayList<>();
-
+        Random rnd = new Random();
         data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/147/147997361.jpg","Sky hotel",4,"Quận cam, TP HCM","0126493541","50 000 đ"));
         data.add(new Hotel("https://ihg.scene7.com/is/image/ihg/holiday-inn-the-colony-4629618286-4x3","Kaze hotel",4,"Thủ Đức TP HCM","6565659","90 000 đ"));
         data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/797/79726354.jpg","Kumo hotel",3,"Nha Trang","45454545","150 000 đ"));
         data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/460/46080789.jpg","Vanish hotel",5," Bến Tre","25252525","125 000 đ"));
-        data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/797/79726354.jpg","Kumo hotel",4,"Trà Vinh","35353535","100 000 đ"));
+        for (int i = 0; i < 100; i++) {
+            data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/797/79726354.jpg","Kumo hotel",rnd.nextInt(6),"Trà Vinh","35353535",rnd.nextInt(999)+"000 đ"));
+        }
 
         mAdapter.setData(data);
+    }
+
+    @OnClick(R.id.search_panel)
+    void goToSearchActivity() {
+        if(getActivity()!=null) {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        }
     }
 }

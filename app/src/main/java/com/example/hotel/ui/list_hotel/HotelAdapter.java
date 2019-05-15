@@ -83,6 +83,9 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ItemHolder> 
         @BindView(R.id.price)
         TextView mPrice;
 
+        @BindView(R.id.favorite)
+        ImageView mFavorie;
+
         public ItemHolder(View itemView){
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -95,6 +98,10 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ItemHolder> 
             mDetail.setText(hotel.getDetail());
             mPrice.setText(hotel.getPrice());
 
+            boolean isFavorite=hotel.getFavorite();
+            bindFavorite(isFavorite);
+
+
             if(mContext!=null)
             Glide.with(mContext).load(hotel.getAvatar()).into(mAvatar);
         }
@@ -104,6 +111,24 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ItemHolder> 
             if(mListener!=null){
                 mListener.onClick(mData.get(getAdapterPosition()));
             }
+        }
+        private void bindFavorite(boolean favor) {
+            if(favor) {
+                mFavorie.setColorFilter(mFavorie.getContext().getResources().getColor(R.color.FlatRed));
+            } else {
+                mFavorie.setColorFilter(0xEEEEEE);
+            }
+        }
+
+        @OnClick(R.id.favorite)
+        void favorOrUnfavorThisItem() {
+           // TODO : notify activity that current favor of this item had changed.
+            // My good english
+
+            boolean favorite  = mData.get(getAdapterPosition()).getFavorite();
+            favorite = !favorite;
+            mData.get(getAdapterPosition()).setFavorite(favorite);
+            bindFavorite(favorite);
         }
     }
 }

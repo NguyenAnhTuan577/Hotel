@@ -16,6 +16,18 @@ public class Hotel implements Parcelable {
     public String mDetail;
     public String mPrice;
 
+    public Hotel(String mAvatar, String mName, float mRate, String mAddress, String mDetail, String mPrice, Boolean mFavorite) {
+        this.mAvatar = mAvatar;
+        this.mName = mName;
+        this.mRate = mRate;
+        this.mAddress = mAddress;
+        this.mDetail = mDetail;
+        this.mPrice = mPrice;
+        this.mFavorite = mFavorite;
+    }
+
+    public Boolean mFavorite;
+
     public Hotel(String mAvatar, String mName, float mRate, String mAddress, String mDetail, String mPrice) {
         this.mAvatar = mAvatar;
         this.mName = mName;
@@ -23,6 +35,7 @@ public class Hotel implements Parcelable {
         this.mAddress = mAddress;
         this.mDetail = mDetail;
         this.mPrice = mPrice;
+        this.mFavorite = false;
     }
 
     public String getAddress() {
@@ -58,12 +71,21 @@ public class Hotel implements Parcelable {
         this.mAvatar = mAvatar;
         this.mName = mName;
         this.mRate = mRate;
+        this.mAddress = "";
+        this.mDetail = "";
+        this.mPrice = "0 đ";
+        this.mFavorite = false;
+
     }
 
     public Hotel() {
         mAvatar="";
         mName="";
         mRate=0;
+        this.mAddress = "";
+        this.mDetail = "";
+        this.mPrice = "0 đ";
+        this.mFavorite = false;
     }
 
     public Hotel setAvatar(String mAvatar) {
@@ -93,6 +115,15 @@ public class Hotel implements Parcelable {
         return mRate;
     }
 
+    public Boolean getFavorite() {
+        return mFavorite;
+    }
+
+    public Hotel setFavorite(Boolean mFavorite) {
+        this.mFavorite = mFavorite;
+        return this;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -106,6 +137,7 @@ public class Hotel implements Parcelable {
         dest.writeString(mAddress);
         dest.writeString(mDetail);
         dest.writeString(mPrice);
+        dest.writeInt(mFavorite ? 1 : 0);
     }
 
     protected Hotel(Parcel in) {
@@ -115,6 +147,7 @@ public class Hotel implements Parcelable {
         this.mAddress = in.readString();
         this.mDetail = in.readString();
         this.mPrice = in.readString();
+        this.mFavorite = in.readInt() == 1;
     }
 
     public static final Creator<Hotel> CREATOR = new Creator<Hotel>() {
