@@ -6,6 +6,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#EAF0F6">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/hotel_recycler_view"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_hotel"
+            android:clipToPadding="false"
+            android:paddingTop="6dp"
+            android:overScrollMode="never"
+            android:orientation="vertical"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
     <View
         android:id="@+id/search_panel"
         android:layout_width="0dp"
@@ -40,21 +60,4 @@
         android:textSize="14sp"
         android:textColor="@android:color/black"
         />
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/hotel_recycler_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/item_hotel"
-        android:clipToPadding="false"
-        android:paddingTop="6dp"
-        android:overScrollMode="never"
-        android:orientation="vertical">
-
-    </android.support.v7.widget.RecyclerView>
-
 </android.support.constraint.ConstraintLayout>

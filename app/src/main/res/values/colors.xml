@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/FlatBlue</color>
-    <color name="colorPrimaryDark">@color/FlatBlue</color>
+    <color name="colorPrimary">@color/FlatGreen</color>
+    <color name="colorPrimaryDark">@color/FlatGreen</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="FlatRed">#FF3B30</color>
@@ -21,4 +21,5 @@
     <color name="HeavyBlue">#00218B</color>
     <color name="HeavyPurple">#162EA6</color>
     <color name="HeavyPink">#B60024</color>
+    <color name="LightBlue">#EAF0F6</color>
 </resources>

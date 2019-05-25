@@ -7,6 +7,16 @@ public class Convenient {
     public String mIcon;
     public boolean mUseDrawable = true;
 
+    public boolean mIsUseConvenient = true;
+
+    public boolean isUseConvenient() {
+        return mIsUseConvenient;
+    }
+
+    public void setmIsUseConvenient(boolean mIsUseConvenient) {
+        this.mIsUseConvenient = mIsUseConvenient;
+    }
+
     public boolean isUseDrawable() {
         return mUseDrawable;
     }
@@ -45,7 +55,9 @@ public class Convenient {
     //@SerializedName("")
     public String mDescribe;
 
-    public Convenient(boolean mUseDrawable,String mIcon,String mName,String mDescribe){
+
+
+    public Convenient(boolean mUseDrawable, String mIcon, String mName, String mDescribe){
         this.mUseDrawable = mUseDrawable;
         this.mIcon=mIcon;
         this.mName=mName;
@@ -64,6 +76,13 @@ public class Convenient {
         this.mIcon = mIcon;
         this.mName = "";
         this.mDescribe = mDescribe;
+    }
+    public Convenient(String mIcon, String mDescribe,boolean mIsUseConvenient) {
+        this.mUseDrawable = true;
+        this.mIcon = mIcon;
+        this.mName = "";
+        this.mDescribe = mDescribe;
+        this.mIsUseConvenient=mIsUseConvenient;
     }
 
     public Convenient(){

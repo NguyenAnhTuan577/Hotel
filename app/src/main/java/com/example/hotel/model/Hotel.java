@@ -3,124 +3,195 @@ package com.example.hotel.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Hotel implements Parcelable {
 
-    // m mún gửi một object tới activity
+    // muốn gửi một object tới activity
     //thì object đó phải là 1 Parcelable
 
-    public String mAvatar;
-    public String mName;
-    public float mRate;
+    private  String id;
 
-    public String mAddress;
-    public String mDetail;
-    public String mPrice;
 
-    public Hotel(String mAvatar, String mName, float mRate, String mAddress, String mDetail, String mPrice, Boolean mFavorite) {
-        this.mAvatar = mAvatar;
-        this.mName = mName;
-        this.mRate = mRate;
-        this.mAddress = mAddress;
-        this.mDetail = mDetail;
-        this.mPrice = mPrice;
-        this.mFavorite = mFavorite;
+
+    private String name;
+    private float rate;
+
+    private String address;
+    private String detail;
+    private String price;
+
+    private String describe;
+
+    public boolean favorite;
+
+    private ArrayList<String> images = new ArrayList<>();
+
+    public Hotel addImages(List<String> data) {
+        if(data!=null)
+        images.addAll(data);
+        return this;
+    }
+    public Hotel addImages(String... data) {
+        images.addAll(Arrays.asList(data));
+        return this;
     }
 
-    public Boolean mFavorite;
+    public Hotel setImages(List<String> data) {
+        images.clear();
+        if(data!=null)
+        images.addAll(data);
+        return this;
+    }
 
-    public Hotel(String mAvatar, String mName, float mRate, String mAddress, String mDetail, String mPrice) {
-        this.mAvatar = mAvatar;
-        this.mName = mName;
-        this.mRate = mRate;
-        this.mAddress = mAddress;
-        this.mDetail = mDetail;
-        this.mPrice = mPrice;
-        this.mFavorite = false;
+    public Hotel(String id, String name, float rate, String address, String detail, String price, String describe, boolean favorite, String mAvatar) {
+        images.add(mAvatar);
+        this.id = id;
+        this.name = name;
+        this.rate = rate;
+        this.address = address;
+        this.detail = detail;
+        this.price = price;
+        this.describe = describe;
+        this.favorite = favorite;
+
+    }
+
+    public Hotel(String id, String name, float rate, String address, String detail, String price, boolean favorite, String mAvatar) {
+        images.add(mAvatar);
+        this.id = id;
+        this.name = name;
+        this.rate = rate;
+        this.address = address;
+        this.detail = detail;
+        this.price = price;
+        this.favorite = favorite;
+
+    }
+    public Hotel(String mAvatar, String name, float rate, String address, String detail, String price, boolean favorite) {
+        images.add(mAvatar);
+        this.name = name;
+        this.rate = rate;
+        this.address = address;
+        this.detail = detail;
+        this.price = price;
+        this.favorite = favorite;
+    }
+
+
+    public Hotel(String mAvatar, String name, float rate, String address, String detail, String price) {
+        images.add(mAvatar);
+        this.name = name;
+        this.rate = rate;
+        this.address = address;
+        this.detail = detail;
+        this.price = price;
+        this.favorite = false;
+
     }
 
     public String getAddress() {
-        return mAddress;
+        return address;
     }
 
     public Hotel setAddress(String mAddress) {
-        this.mAddress = mAddress;
+        this.address = mAddress;
         return this;
     }
 
     public String getDetail() {
-        return mDetail;
+        return detail;
     }
 
     public Hotel setDetail(String mDetail) {
-        this.mDetail = mDetail;
+        this.detail = mDetail;
         return this;
     }
 
     public String getPrice() {
-        return mPrice;
+        return price;
     }
 
     public Hotel setPrice(String mPrice) {
-        this.mPrice = mPrice;
+        this.price = mPrice;
         return this;
     }
 
 
 
-    public Hotel(String mAvatar, String mName, float mRate) {
-        this.mAvatar = mAvatar;
-        this.mName = mName;
-        this.mRate = mRate;
-        this.mAddress = "";
-        this.mDetail = "";
-        this.mPrice = "0 đ";
-        this.mFavorite = false;
+    public Hotel(String mAvatar, String name, float rate) {
+        images.add(mAvatar);
+        this.name = name;
+        this.rate = rate;
+        this.address = "";
+        this.detail = "";
+        this.price = "0 đ";
+        this.favorite = false;
 
     }
 
     public Hotel() {
-        mAvatar="";
-        mName="";
-        mRate=0;
-        this.mAddress = "";
-        this.mDetail = "";
-        this.mPrice = "0 đ";
-        this.mFavorite = false;
+        images.add("");
+        name ="";
+        rate =0;
+        this.address = "";
+        this.detail = "";
+        this.price = "0 đ";
+        this.favorite = false;
     }
 
     public Hotel setAvatar(String mAvatar) {
-        this.mAvatar = mAvatar;
+        images.add(0,mAvatar);
         return this;
     }
 
     public Hotel setName(String mName) {
-        this.mName = mName;
+        this.name = mName;
         return this;
     }
 
     public Hotel setRate(int mRate) {
-        this.mRate = mRate;
+        this.rate = mRate;
+        return this;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public Hotel setId(String id) {
+        this.id = id;
         return this;
     }
 
     public String getAvatar() {
-        return mAvatar;
+        return images.get(0);
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public float getRate() {
-        return mRate;
+        return rate;
     }
 
-    public Boolean getFavorite() {
-        return mFavorite;
+    public boolean getFavorite() {
+        return favorite;
     }
 
-    public Hotel setFavorite(Boolean mFavorite) {
-        this.mFavorite = mFavorite;
+    public Hotel setFavorite(boolean mFavorite) {
+        this.favorite = mFavorite;
+        return this;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public Hotel setDescribe(String describe) {
+        this.describe = describe;
         return this;
     }
 
@@ -131,23 +202,27 @@ public class Hotel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mAvatar);
-        dest.writeString(mName);
-        dest.writeFloat(mRate);
-        dest.writeString(mAddress);
-        dest.writeString(mDetail);
-        dest.writeString(mPrice);
-        dest.writeInt(mFavorite ? 1 : 0);
+        dest.writeStringList(images);
+        dest.writeString(id);
+        dest.writeString(name);
+        dest.writeString(describe);
+        dest.writeFloat(rate);
+        dest.writeString(address);
+        dest.writeString(detail);
+        dest.writeString(price);
+        dest.writeInt(favorite ? 1 : 0);
     }
 
     protected Hotel(Parcel in) {
-        this.mAvatar = in.readString();
-        this.mName =  in.readString();
-        this.mRate = in.readFloat();
-        this.mAddress = in.readString();
-        this.mDetail = in.readString();
-        this.mPrice = in.readString();
-        this.mFavorite = in.readInt() == 1;
+        in.readStringList(images);
+        this.id=in.readString();
+        this.name =  in.readString();
+        this.describe=in.readString();
+        this.rate = in.readFloat();
+        this.address = in.readString();
+        this.detail = in.readString();
+        this.price = in.readString();
+        this.favorite = in.readInt() == 1;
     }
 
     public static final Creator<Hotel> CREATOR = new Creator<Hotel>() {
@@ -159,4 +234,8 @@ public class Hotel implements Parcelable {
             return new Hotel[size];
         }
     };
+
+    public List<String> getImages() {
+        return images;
+    }
 }

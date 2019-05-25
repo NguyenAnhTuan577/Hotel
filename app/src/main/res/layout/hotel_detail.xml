@@ -11,18 +11,47 @@
     android:layout_height="match_parent">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
+        android:layout_height="match_parent"
+        android:paddingTop="60dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:id="@+id/cover"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:id="@+id/cover_view_pager"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/convenient_label"
+            app:layout_constraintBottom_toTopOf="@id/des_label"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_h"/>
+            />
+        <TextView
+            android:id="@+id/des_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mô tả"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/FlatBlue"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cover_view_pager"
+            />
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Nằm trên đường Thủ Khoa Huân, Silverland Yen Hotel cách Chợ Bến Thành chỉ 6 phút đi bộ. Khách sạn có bể sục nước nóng ngoài trời và tiện nghi phòng xông hơi khô/xông hơi ướt."
+            android:textSize="14sp"
+            android:textColor="#111"
+            android:layout_marginStart="8dp"
+            android:padding="4dp"
+            app:layout_constraintStart_toStartOf="@id/fit_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/des_label"
+            />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,8 +64,8 @@
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@id/cover"
-            app:layout_constraintTop_toBottomOf="@id/cover"
+            app:layout_constraintStart_toStartOf="@id/cover_view_pager"
+            app:layout_constraintTop_toBottomOf="@id/des"
             app:layout_constraintEnd_toEndOf="parent"
             />
         <android.support.v7.widget.RecyclerView
@@ -46,6 +75,8 @@
             app:layout_constraintTop_toBottomOf="@id/convenient_label"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             tools:listitem="@layout/item_convenient_hotel_detail"
             tools:layoutManager="GridLayoutManager"
             tools:spanCount="2"
@@ -72,7 +103,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="10dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintStart_toStartOf="@id/cover_view_pager"
             app:layout_constraintTop_toBottomOf="@id/devider0"
             app:layout_constraintEnd_toEndOf="parent"
             />
@@ -101,7 +132,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintStart_toStartOf="@id/cover_view_pager"
             app:layout_constraintTop_toBottomOf="@id/devider1" />
         <TextView
             android:layout_width="0dp"
@@ -162,7 +193,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintStart_toStartOf="@id/cover_view_pager"
             app:layout_constraintTop_toBottomOf="@id/devider2" />
         <TextView
             android:layout_width="0dp"
@@ -224,7 +255,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintStart_toStartOf="@id/cover_view_pager"
             app:layout_constraintTop_toBottomOf="@id/devider3" />
         <TextView
             android:layout_width="0dp"
@@ -262,7 +293,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/cover"
+            app:layout_constraintStart_toStartOf="@id/cover_view_pager"
             app:layout_constraintTop_toBottomOf="@id/devider4" />
 
         <ImageView
@@ -345,13 +376,58 @@
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/FlatGreen">
     <ImageView
         android:id="@+id/back"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/ic_arrow_back_black_24dp"
         android:tint="@android:color/white"
-        android:padding="16dp"
+        android:padding="12dp"
         android:layout_margin="6dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Endless Love"
+        app:layout_constraintStart_toEndOf="@id/back"
+        app:layout_constraintTop_toTopOf="@id/back"
+        app:layout_constraintBottom_toTopOf="@id/rating_hotel"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#EEE"
+        android:layout_marginStart="20dp"
+        />
+    <RatingBar
+        android:id="@+id/rating_hotel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        tools:rating="3.5"
+        android:theme="@style/RatingBar"
+        android:numStars="5"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintBottom_toBottomOf="@id/back"
+
+        />
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_heart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/back"
+        android:layout_marginEnd="16dp"
+        android:padding="12dp"
+        />
+    </android.support.constraint.ConstraintLayout>
 </FrameLayout>

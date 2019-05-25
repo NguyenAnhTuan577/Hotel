@@ -1,6 +1,9 @@
 package com.example.hotel.ui.detail;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -97,8 +100,18 @@ public class ConvenientAdapter extends RecyclerView.Adapter<ConvenientAdapter.It
                 mIcon.setImageResource(ImageUtil.getDrawableIdByImageKey(convenient.mIcon));
             else
             Glide.with(mContext).load(convenient.mIcon).into(mIcon);
-        }
 
+            if(!convenient.isUseConvenient()){
+                mIcon.setAlpha(0.5f);
+                mName.setAlpha(0.5f);
+                mDescribe.setAlpha(0.5f);
+            } else {
+                mIcon.setAlpha(1f);
+                mName.setAlpha(1f);
+                mDescribe.setAlpha(1f);
+            }
+
+        }
 
     }
 }

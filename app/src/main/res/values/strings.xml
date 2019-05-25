@@ -18,4 +18,6 @@
         completions."
     </string>
     <string name="search">Search</string>
+    <string name="image">Image</string>
+    <string name="search_query_hint">Type a name..</string>
 </resources>
