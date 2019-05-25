@@ -12,11 +12,6 @@
         android:title="Favorite" />
 
     <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="Search" />
-
-    <item
         android:id="@+id/navigation_account"
         android:icon="@drawable/ic_person_black_24dp"
         android:title="Account" />
