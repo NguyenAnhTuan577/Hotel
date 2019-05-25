@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     final HomeFragment mHomeFragment = new HomeFragment();
     final FavoriteFragment mFavoriteFragment = new FavoriteFragment();
-    final MapFragment mMapFragment = new MapFragment();
     final UserFragment mUserFragment = new UserFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = mHomeFragment;
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         fm.beginTransaction().add(R.id.fragment_container, mHomeFragment, "1").commit();
         fm.beginTransaction().add(R.id.fragment_container, mFavoriteFragment, "2").hide(mFavoriteFragment).commit();
-        fm.beginTransaction().add(R.id.fragment_container, mMapFragment, "3").hide(mMapFragment).commit();
         fm.beginTransaction().add(R.id.fragment_container, mUserFragment, "3").hide(mUserFragment).commit();
 
         BottomNavigationView botNav = findViewById(R.id.navigation);
@@ -48,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_favorite:
                         fm.beginTransaction().hide(active).show(mFavoriteFragment).commit();
                         active = mFavoriteFragment;
-                        return true;
-
-                    case R.id.navigation_search:
-                        fm.beginTransaction().hide(active).show(mMapFragment).commit();
-                        active = mMapFragment;
                         return true;
 
                     case R.id.navigation_account:
