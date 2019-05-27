@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.hotel.ui.main.MapsActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -61,7 +62,6 @@ public class HotelsNearby extends AsyncTask<Object,String,String> {
             e.printStackTrace();
             return data;
         } catch (Exception e) {
-            // Handle your exceptions
             return data;
         }
 
@@ -81,15 +81,17 @@ public class HotelsNearby extends AsyncTask<Object,String,String> {
                 String longtitude = locationObj.getString("lng");
 
                 JSONObject nameObject = resultArray.getJSONObject(i);
-                String name_ATM = nameObject.getString("name");
+                String name_hotel = nameObject.getString("name");
                 String vicinity = nameObject.getString("vicinity");
 
                 LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longtitude));
                 MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(name_ATM);
+                markerOptions.title(name_hotel);
                 markerOptions.snippet(vicinity);
                 markerOptions.position(latLng);
-                //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.atm_icon));
+                markerOptions.icon(BitmapDescriptorFactory
+                                .defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon));
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
                 map.addMarker(markerOptions);
             }
