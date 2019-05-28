@@ -1,5 +1,6 @@
 package com.example.hotel.ui.detail;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.example.hotel.R;
 import com.example.hotel.model.Hotel;
 import com.example.hotel.ui.image_cover.CoverActivity;
 import com.example.hotel.ui.image_cover.CoverPagerAdapter;
+import com.example.hotel.ui.oder.OrderActivity;
 import com.example.hotel.util.ImageUtil;
 
 import java.util.ArrayList;
@@ -55,6 +57,15 @@ public class HotelDetailActivity extends AppCompatActivity implements View.OnCli
     @OnClick(R.id.back)
     void back() {
         finish();
+    }
+
+    @OnClick(R.id.book_hotel)
+    void goToOder(){
+        ActivityOptions options = ActivityOptions.makeCustomAnimation(this,R.anim.push_left_in,R.anim.fade_out);
+
+        Intent intent =new Intent(this,OrderActivity.class);
+        intent.putExtra(OrderActivity.HOTEL,mHotel);
+        startActivity(intent,options.toBundle());
     }
 
 

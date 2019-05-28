@@ -22,4 +22,5 @@
     <color name="HeavyPurple">#162EA6</color>
     <color name="HeavyPink">#B60024</color>
     <color name="LightBlue">#EAF0F6</color>
+    <color name="tempColor">#22111111</color>
 </resources>

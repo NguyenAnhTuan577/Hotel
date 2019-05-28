@@ -14,8 +14,6 @@ public class Hotel implements Parcelable {
 
     private  String id;
 
-
-
     private String name;
     private float rate;
 
@@ -28,6 +26,33 @@ public class Hotel implements Parcelable {
     public boolean favorite;
 
     private ArrayList<String> images = new ArrayList<>();
+
+
+    private ArrayList<String> roomType = new ArrayList<>();
+    private ArrayList<Integer> roomPrice=new ArrayList<>();
+
+    public ArrayList<String> getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(ArrayList<String> roomType) {
+        this.roomType = roomType;
+    }
+
+    public void addAllRoomType(List<String> type) {
+        roomType.addAll(type);
+    }
+    public void addAllđrice(List<Integer> price) {
+        roomPrice.addAll(price);
+    }
+
+    public ArrayList<Integer> getRoomPrice() {
+        return roomPrice;
+    }
+
+    public void setRoomPrice(ArrayList<Integer> roomPrice) {
+        this.roomPrice = roomPrice;
+    }
 
     public Hotel addImages(List<String> data) {
         if(data!=null)
@@ -202,6 +227,8 @@ public class Hotel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringList(roomType);
+        dest.writeList(roomPrice);
         dest.writeStringList(images);
         dest.writeString(id);
         dest.writeString(name);
@@ -214,8 +241,10 @@ public class Hotel implements Parcelable {
     }
 
     protected Hotel(Parcel in) {
-        in.readStringList(images);
-        this.id=in.readString();
+        in.readStringList(this.roomType);
+        in.readList(this.roomPrice,Integer.class.getClassLoader());
+        in.readStringList(this.images);
+        this.id = in.readString();
         this.name =  in.readString();
         this.describe=in.readString();
         this.rate = in.readFloat();
@@ -237,5 +266,9 @@ public class Hotel implements Parcelable {
 
     public List<String> getImages() {
         return images;
+    }
+
+    public void addRoomPrice(int i) {
+        roomPrice.add(i);
     }
 }

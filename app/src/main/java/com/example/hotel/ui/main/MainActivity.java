@@ -59,11 +59,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeFavoriteInFavoriteTab(Hotel hotel, int position) {
-        if (mFavoriteFragment != null) mFavoriteFragment.changedFavoriteThisHotel(hotel, position);
+        mFavoriteFragment.changedFavoriteThisHotel(hotel, position);
     }
 
     public void changeFavoriteInHomeTab(Hotel hotel, int position) {
-        if (mHomeFragment != null)
-            mHomeFragment.changeFavoriteThisHotel(hotel, position);
+        mHomeFragment.changeFavoriteThisHotel(hotel, position);
     }
 }

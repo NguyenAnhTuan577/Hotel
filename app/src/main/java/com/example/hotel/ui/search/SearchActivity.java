@@ -46,7 +46,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     private HotelAdapter mAdapter;
 
-    // cái hồi nãy là đùng searchview_của_toobar_của_giao_diện_android_thuần_phong_cách_google// còn đây m thêm hẳn vsearch_view vô giao diện rồi, 2 cái khác nhau ừm
     @BindView(R.id.search_view)
     SearchView mSearchView;
 
@@ -108,7 +107,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
         Toast.makeText(this,"Trying to get data from server", Toast.LENGTH_SHORT).show();
         FirebaseFirestore.getInstance()
-                .collection("hotel")
+                .collection("hotels")
                 .get()
                 .addOnSuccessListener(this)
                 .addOnFailureListener(this);
@@ -143,14 +142,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        // đây là lúc, người dùng thay đổi text trong search_view
-        // có thể là xóa, nhập , vân vân mây mây
-        // sẽ đi vô dây hết
 
-        // nhiệm vụ lúc này là
-        // filter list hotel rồi set cho adapter
-
-        // okieok
 
         if(!newText.isEmpty()) {
             List<Hotel> filterHotels = filter(mOriginalData, newText);
@@ -166,8 +158,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     }
 
-    // Search là search nhiều trường mà, đâu chỉ search mỗi tên, ví dụ m muốn nhập Hồ chí minh mà nó ra dc toàn bộ
-    // hotel thuộc hồ chí minh, có phải hay hơn không,v để t chỉnh tên,.detail t dùng làm sđt
 
     private static List<Hotel> filter(List<Hotel> hotels, String query) {
         final String lowerCaseQuery = deAccent(query.toLowerCase());
@@ -185,18 +175,13 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         return list;
     }
 
-
-
-
-
-
     @Override
     public void onHotelItemClick(Hotel hotel, int position) {
         Intent intent=new Intent(this,HotelDetailActivity.class);
         intent.putExtra(HotelDetailActivity.HOTEL,hotel);
         startActivity(intent);
     }
-    // save 1 list data ở đây để search
+
     private ArrayList<Hotel> mOriginalData = new ArrayList<>();
 
 
@@ -204,8 +189,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
         List<Hotel> hotels=queryDocumentSnapshots.toObjects(Hotel.class);
 
-        // lúc lấy dc data, không hiển thị nó ra
-        // chỉ lưu lại cho list search thôi
+
         mOriginalData.clear();
         mOriginalData.addAll(hotels);
 

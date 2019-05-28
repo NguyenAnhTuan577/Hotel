@@ -10,20 +10,23 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintVertical_bias="0.0">
+
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/hotel_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/hotel_recycler_view"
-            tools:layoutManager="LinearLayoutManager"
-            tools:listitem="@layout/item_hotel"
             android:clipToPadding="false"
-            android:paddingTop="60dp"
+            android:orientation="vertical"
             android:overScrollMode="never"
-            android:orientation="vertical"/>
+            android:paddingTop="60dp"
+            tools:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_hotel" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <View
@@ -61,5 +64,16 @@
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="#666"
+        />
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/location"
+        android:tint="@color/FlatGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp"
+        android:padding="10dp"
         />
 </android.support.constraint.ConstraintLayout>

@@ -88,7 +88,7 @@ public class FavoriteFragment extends Fragment implements HotelAdapter.HotelCall
 
     private void getFromFireBase(){
         FirebaseFirestore.getInstance()
-                .collection("hotel")
+                .collection("hotels")
                 .whereEqualTo("favorite",true)
                 .addSnapshotListener(this);
     }
@@ -101,7 +101,7 @@ public class FavoriteFragment extends Fragment implements HotelAdapter.HotelCall
 
     private void setFireBase(Hotel hotel,int position){
         FirebaseFirestore.getInstance()
-                .collection("hotel")
+                .collection("hotels")
                 .document(hotel.getId())
                 .update("favorite",hotel.getFavorite());
     }
@@ -129,7 +129,7 @@ public class FavoriteFragment extends Fragment implements HotelAdapter.HotelCall
     }
 
     public void changedFavoriteThisHotel(Hotel hotel, int position) {
-        Toast.makeText(getContext(),"I am FavoriteTab, have a favorite hotel changed ?", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"I am FavoriteTab, have a favorite hotel changed ?", Toast.LENGTH_SHORT).show();
 
         refreshData();
 

@@ -85,6 +85,7 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
         }
     }
 
+
     @Override
     public void onHotelItemClick(Hotel hotel,int position) {
         if (getActivity() != null) {
@@ -96,7 +97,7 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
     private void getFromFireBase() {
 
         FirebaseFirestore.getInstance()
-                .collection("hotel")
+                .collection("hotels")
                 .get()
                 .addOnSuccessListener(this)
                 .addOnFailureListener(this);
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
 
     private void  setFireBase(Hotel hotel,int position){
         FirebaseFirestore.getInstance()
-                .collection("hotel")
+                .collection("hotels")
                 .document(hotel.getId())
                 .update("favorite",hotel.getFavorite());
 
@@ -152,7 +153,7 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
 
 
     public void changeFavoriteThisHotel(Hotel hotel, int position) {
-        Toast.makeText(getContext(),"I am Home Fragment, do U want me to change favorite this hotel ?", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"I am Home Fragment, do U want me to change favorite this hotel ?", Toast.LENGTH_SHORT).show();
 
         getFromFireBase();
         mAdapter.notifyItemChange(hotel);
@@ -169,6 +170,8 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
         mSwipeRefresh.setRefreshing(false);
 
         Log.d(TAG,"Success !!!");
+
+
     }
 
     @Override

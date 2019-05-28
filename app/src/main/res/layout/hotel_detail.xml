@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="60dp"
+        android:paddingBottom="50dp"
         android:focusable="true"
         android:focusableInTouchMode="true">
         <android.support.v4.view.ViewPager
@@ -379,7 +380,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/FlatGreen">
+        android:background="@color/FlatGreen"
+        >
     <ImageView
         android:id="@+id/back"
         android:layout_width="50dp"
@@ -430,4 +432,14 @@
         android:padding="12dp"
         />
     </android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/book_hotel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:text="Book Now"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#EEE"
+        android:background="@color/FlatGreen"/>
 </FrameLayout>
