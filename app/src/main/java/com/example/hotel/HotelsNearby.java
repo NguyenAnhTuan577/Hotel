@@ -94,6 +94,7 @@ public class HotelsNearby extends AsyncTask<Object,String,String> {
                 //markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon));
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
                 map.addMarker(markerOptions);
+
             }
 
 

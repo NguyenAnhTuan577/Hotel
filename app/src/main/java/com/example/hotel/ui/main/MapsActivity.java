@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,18 +26,17 @@ import android.widget.Toast;
 
 import com.example.hotel.HotelsNearby;
 import com.example.hotel.R;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,7 +45,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationSource.OnLocationChangedListener {
 
     private static final String TAG = "MapsActivity";
 
@@ -55,7 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int REQUEST_CODE = 9999;
     private static final float DEFAULT_ZOOM = 15f;
-    private  static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40,-168),new LatLng(71,136));
+
 
     private EditText mSearchBox;
     private View mapView;
@@ -64,20 +62,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Boolean mLocationPermissionGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    private Location mLastLocation;
+    private Location mLastLocation = new Location("default location");
+    Marker searchMarker, myMarker;
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mSearchBox = (EditText) findViewById(R.id.txtSearch);
+        mLastLocation.setLatitude(10.762622);
+        mLastLocation.setLongitude(106.660172);
 
         getLocationPermission();
-        init();
+        initSearchBox();
     }
 
-    private void init(){
+    private void initSearchBox(){
         Log.d(TAG,"init: initializing");
 
         mSearchBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -127,25 +130,40 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         Log.d(TAG,"onMapReady: map is ready");
         mMap = googleMap;
-        if (mLocationPermissionGranted) {
-            getDeviceLocation();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(statusOfGPS){
+            if (mLocationPermissionGranted) {
+                getDeviceLocation();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setZoomControlsEnabled(true);
+                mMap.getUiSettings().setMapToolbarEnabled(false);
+                if (mapView != null) {
+
+                    View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
+                    RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams)
+                            locationButton.getLayoutParams();
+                    layoutParams1.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+                    layoutParams1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                    layoutParams1.setMargins(0, 150, 30, 0);
+
+                    View zoomControls = mapView.findViewById(0x1);
+                    RelativeLayout.LayoutParams layoutParams2 = (RelativeLayout.LayoutParams) zoomControls.getLayoutParams();
+
+                    layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+                    layoutParams2.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+                    layoutParams2.setMargins(0, 0, 30, 100);
+                }
             }
-            mMap.setMyLocationEnabled(true);
-            mMap.getUiSettings().setZoomControlsEnabled(true);
-            mMap.getUiSettings().setMapToolbarEnabled(false);
-            if (mapView != null &&
-                    mapView.findViewById(Integer.parseInt("1")) != null) {
-                View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)
-                        locationButton.getLayoutParams();
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-                layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
-                layoutParams.setMargins(0, 150, 30, 0);
-            }
+        }
+        else {
+            mLastLocation = null;
+            Toast.makeText(MapsActivity.this, "Please turn on GPS", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -160,9 +178,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onComplete(@NonNull Task task) {
                         if(task.isSuccessful()){
                             Log.d(TAG,"onComplete: location was found");
-                            Location currentLocation = (Location)task.getResult();
-                            mLastLocation = currentLocation;
-                            moveCamera(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),DEFAULT_ZOOM,"Current location");
+                            mLastLocation = (Location)task.getResult();
+                            moveCamera(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()),DEFAULT_ZOOM,"My location");
                         }else {
                             Log.d(TAG,"onComplete: location is null");
                             Toast.makeText(MapsActivity.this,"Can not get current location",Toast.LENGTH_SHORT).show();
@@ -176,16 +193,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void findHotels(View v) {
-        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        if (statusOfGPS && mLastLocation.getLatitude() != 0.d) {
+
+        if ( mLastLocation != null) {
             StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
             stringBuilder.append("location=").append(mLastLocation.getLatitude()).append(",").append(mLastLocation.getLongitude());
             stringBuilder.append("&radius=" + 5000);
             stringBuilder.append("&keyword=" + "hotel");
             stringBuilder.append("&key=").append(getResources().getString(R.string.map_key));
-//
+
             String url = stringBuilder.toString();
 
             Object dataTransfer[] = new Object[2];
@@ -204,19 +220,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void moveCamera(LatLng latLng, float zoom,String title){
         Log.d(TAG,"moveCamera: moving camera to: " + latLng.latitude + "," + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
-        if(!title.equals("Current location")){
+        if(!title.equals("My location")){
+            if(searchMarker != null){
+                searchMarker.remove();
+            }
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
                     .title(title)
                     .icon(BitmapDescriptorFactory
                     .defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            mMap.addMarker(options);
+            searchMarker = mMap.addMarker(options);
         }
         else{
+            if(myMarker != null){
+                myMarker.remove();
+            }
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
                     .title(title);
-            mMap.addMarker(options);
+            myMarker = mMap.addMarker(options);
         }
         hideKeyboard();
     }
@@ -265,5 +287,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void hideKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    @Override
+    public void onLocationChanged(final Location location) {
+        mLastLocation = location;
     }
 }
