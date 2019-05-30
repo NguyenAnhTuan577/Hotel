@@ -11,17 +11,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.hotel.Change_Infor;
-import com.example.hotel.Change_Language;
-import com.example.hotel.Help;
-import com.example.hotel.History;
-import com.example.hotel.InforCard;
-import com.example.hotel.Notify;
+import com.example.hotel.Infor_User.Change_Infor;
+import com.example.hotel.Infor_User.Change_Language;
+import com.example.hotel.Infor_User.Help;
+import com.example.hotel.Infor_User.History;
+import com.example.hotel.Infor_User.InforCard;
+import com.example.hotel.Infor_User.Notify;
+import com.example.hotel.Login_Register.Login;
 import com.example.hotel.R;
-import com.example.hotel.SecurAccount;
+import com.example.hotel.Infor_User.SecurAccount;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     Button txtLanguage,txtHistory,txtInforCard,txtNotify,txtSecure,txtHelp,txtLogout;
@@ -48,7 +47,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         txtHelp.setOnClickListener((OnClickListener) this);
         txtLogout.setOnClickListener((OnClickListener) this);
         imgEditInfor.setOnClickListener((OnClickListener) this);
-
         return view;
     }
 
@@ -97,6 +95,10 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             }
             case  R.id.txtLogout: {
+                Intent intent = new Intent(getContext(),Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
+                getActivity().finish();
                 break;
             }
 
@@ -105,4 +107,6 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             }
         }
     }
+
+
 }

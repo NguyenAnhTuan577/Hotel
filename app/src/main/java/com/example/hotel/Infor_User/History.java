@@ -1,10 +1,12 @@
-package com.example.hotel;
+package com.example.hotel.Infor_User;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.hotel.R;
 
 import java.util.ArrayList;
 

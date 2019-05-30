@@ -19,30 +19,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MapsActivity"/>
-        <activity android:name=".Help" />
-        <activity android:name=".SecurAccount" />
-        <activity android:name=".Notify" />
-        <activity android:name=".InforCard" />
-        <activity android:name=".History" />
-        <activity android:name=".Change_Infor" />
-        <activity android:name=".Change_Language" />
+        <activity android:name=".Login_Register.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.main.MapsActivity" />
+        <activity android:name=".Infor_User.Help" />
+        <activity android:name=".Infor_User.SecurAccount" />
+        <activity android:name=".Infor_User.Notify" />
+        <activity android:name=".Infor_User.InforCard" />
+        <activity android:name=".Infor_User.History" />
+        <activity android:name=".Infor_User.Change_Infor" />
+        <activity android:name=".Infor_User.Change_Language" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
+
         <activity android:name=".ui.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".ui.detail.HotelDetailActivity"/>
-        <activity android:name=".ui.search.SearchActivity"/>
-        <activity android:name=".ui.image_cover.CoverActivity"
-            android:theme="@style/AppTheme.BlackStatus"/>
-        <activity android:name=".ui.oder.OrderActivity"/>
+        <activity android:name=".ui.detail.HotelDetailActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity
+            android:name=".ui.image_cover.CoverActivity"
+            android:theme="@style/AppTheme.BlackStatus" />
+        <activity android:name=".ui.oder.OrderActivity" />
     </application>
 
 </manifest>

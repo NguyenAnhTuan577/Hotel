@@ -1,4 +1,4 @@
-package com.example.hotel;
+package com.example.hotel.Infor_User;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.hotel.History_Booking;
 import com.example.hotel.R;
 
 import java.util.List;
