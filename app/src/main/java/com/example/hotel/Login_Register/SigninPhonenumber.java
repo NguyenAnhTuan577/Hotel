@@ -1,6 +1,7 @@
 package com.example.hotel.Login_Register;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.hotel.R;
+import com.example.hotel.ui.main.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -29,6 +31,7 @@ public class SigninPhonenumber extends AppCompatActivity {
 
     EditText txtPhoneNumber, txtCode;
     Button btnSendSMS, btnVerifyCode;
+
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private String mVerificationId;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
@@ -66,6 +69,30 @@ public class SigninPhonenumber extends AppCompatActivity {
             }
         });
 
+        btnVerifyCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String code = txtCode.getText().toString();
+
+
+                if (code.isEmpty()) {
+                    Toast.makeText(SigninPhonenumber.this, "Chưa nhập mã code", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    loadingBar.setTitle("Đang kiểm tra mã");
+                    loadingBar.setMessage("Vui lòng đợi!");
+                    loadingBar.setCanceledOnTouchOutside(false);
+                    loadingBar.show();
+
+                    Toast.makeText(SigninPhonenumber.this, code, Toast.LENGTH_SHORT).show();
+                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+                    signInWithPhoneAuthCredential(credential);
+                }
+
+            }
+        });
+
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
@@ -85,48 +112,29 @@ public class SigninPhonenumber extends AppCompatActivity {
 
                 mVerificationId = verificationId;
                 mResendToken = token;
-                loadingBar.dismiss();
+
                 Toast.makeText(SigninPhonenumber.this, "Đang gửi mã code", Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
+
                 txtCode.setVisibility(View.VISIBLE);
                 btnSendSMS.setVisibility(View.INVISIBLE);
                 btnVerifyCode.setVisibility(View.VISIBLE);
+                txtPhoneNumber.setEnabled(false);
+
             }
         };
 
-        btnVerifyCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String code = txtCode.getText().toString();
-
-
-                if (code.isEmpty()) {
-                    Toast.makeText(SigninPhonenumber.this, "Chưa nhập mã code", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    loadingBar.setTitle("Đang kiểm tra mã");
-                    loadingBar.setMessage("Vui lòng đợi!");
-                    loadingBar.setCanceledOnTouchOutside(false);
-                    loadingBar.show();
-                    Toast.makeText(SigninPhonenumber.this, code, Toast.LENGTH_SHORT).show();
-
-                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
-                    signInWithPhoneAuthCredential(credential);
-                }
-
-            }
-        });
-
     }
-
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             loadingBar.dismiss();
+                            Intent intent = new Intent(SigninPhonenumber.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
                         } else {
                             loadingBar.dismiss();
                             Toast.makeText(SigninPhonenumber.this, task.getException().getMessage().toString(), Toast.LENGTH_SHORT).show();

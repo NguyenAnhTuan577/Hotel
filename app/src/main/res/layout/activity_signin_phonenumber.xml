@@ -27,7 +27,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:text="+84392292912"
+            android:text="+84"
             android:id="@+id/txtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="50dp"

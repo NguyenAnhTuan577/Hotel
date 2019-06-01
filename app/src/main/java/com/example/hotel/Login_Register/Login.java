@@ -110,6 +110,7 @@ public class Login extends AppCompatActivity {
                                     Intent intent = new Intent(Login.this, MainActivity.class);
                                     startActivity(intent);
                                     loadingBar.dismiss();
+                                    finish();
                                 }
                             }).start();
 

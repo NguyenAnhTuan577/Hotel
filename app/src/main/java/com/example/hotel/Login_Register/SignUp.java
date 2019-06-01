@@ -1,6 +1,7 @@
 package com.example.hotel.Login_Register;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
     EditText txtEmailSignup, txtPasswordSignup, txtRetypePassSigup;
-    Button btnSign_up;
+    Button btnSign_up,btnSigninPhonenumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class SignUp extends AppCompatActivity {
         txtPasswordSignup = (EditText) findViewById(R.id.txtPasswordSignup);
         txtRetypePassSigup = (EditText) findViewById(R.id.txtRetypePassSigup);
         btnSign_up = (Button) findViewById(R.id.btnSign_up);
+        btnSigninPhonenumber=(Button) findViewById(R.id.btnSigninPhonenumber);
     }
 
     private void Click() {
@@ -80,6 +82,13 @@ public class SignUp extends AppCompatActivity {
                     loadingBar.show();
                     Signup();
                 }
+            }
+        });
+        btnSigninPhonenumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignUp.this, SigninPhonenumber.class);
+                startActivity(intent);
             }
         });
     }
@@ -101,7 +110,6 @@ public class SignUp extends AppCompatActivity {
                             }
                         }
                     });
-
     }
 
 }

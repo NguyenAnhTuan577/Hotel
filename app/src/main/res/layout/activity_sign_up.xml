@@ -160,7 +160,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:background="@drawable/custom_button_login_phonenumber"
                 android:drawableLeft="@drawable/phonenumber"
-                android:text="Sign in with Phone numbe"
+                android:text="Sign in with Phone number"
                 android:textAllCaps="false"
                 android:textColor="#FFF" />
         </LinearLayout>
