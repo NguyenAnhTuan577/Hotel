@@ -19,10 +19,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Login_Register.SigninPhonenumber"></activity>
+        <activity
+            android:name=".ui.login.SignInPhoneNumber"
+            android:label="@string/title_activity_sign_in_phone_number" />
+        <activity android:name=".Login_Register.SignUp" />
         <activity android:name=".Login_Register.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,8 +45,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
-        <activity android:name=".ui.main.MainActivity">
-        </activity>
+        <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.detail.HotelDetailActivity" />
         <activity android:name=".ui.search.SearchActivity" />
         <activity
