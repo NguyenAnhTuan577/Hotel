@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="60dp">
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/FlatGreen">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:padding="12dp"
+            android:layout_margin="6dp"
+            android:tint="@color/White"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <TextView
+            android:id="@+id/oder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Your purchase"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#EEE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/back"
+            app:layout_constraintBottom_toBottomOf="@id/back"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

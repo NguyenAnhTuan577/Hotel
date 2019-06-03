@@ -302,5 +302,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="#EEE"
-        android:background="@color/FlatGreen"/>
+        android:background="@color/FlatGreen"
+        />
 </FrameLayout>
