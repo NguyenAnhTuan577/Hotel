@@ -2,8 +2,6 @@ package com.example.hotel;
 
 import android.app.Application;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-
 public class App extends Application {
     private static App sInstance;
 

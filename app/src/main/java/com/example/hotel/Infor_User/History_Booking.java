@@ -1,4 +1,4 @@
-package com.example.hotel;
+package com.example.hotel.Infor_User;
 
 public class History_Booking {
     private int imgHotel;
