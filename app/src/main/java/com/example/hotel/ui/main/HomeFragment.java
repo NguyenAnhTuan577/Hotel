@@ -151,6 +151,17 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
         }
     }
 
+    @OnClick(R.id.location)
+    void goToMapActivity() {
+        if(getActivity()!=null) {
+
+            ActivityOptions options = ActivityOptions.makeCustomAnimation(getContext(),R.anim.push_left_in,R.anim.fade_out);
+
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+            startActivity(intent,options.toBundle());
+        }
+    }
+
 
     public void changeFavoriteThisHotel(Hotel hotel, int position) {
         //Toast.makeText(getContext(),"I am Home Fragment, do U want me to change favorite this hotel ?", Toast.LENGTH_SHORT).show();
