@@ -1,24 +1,26 @@
-package com.example.hotel.Login_Register;
+package com.example.hotel.ui.Login_Register;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hotel.R;
+import com.example.hotel.model.UserInfo;
+import com.example.hotel.ui.main.MainActivity;
+import com.example.hotel.util.DocumentPushResultListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -101,15 +103,53 @@ public class SignUp extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                loadingBar.dismiss();
-                                Toast.makeText(SignUp.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                            } else {
-                                loadingBar.dismiss();
-                                Toast.makeText(SignUp.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
+                            if (task.isSuccessful()&&task.getResult()!=null)
+                                createUserInfo(task.getResult().getUser());
+                                else if(task.getException()!=null) notifyFailure(task.getException().getMessage());
+                                else notifyFailure("Xin lỗi, vui lòng thử lại");
                         }
                     });
     }
+    private void notifyOnSuccess() {
+        loadingBar.dismiss();
+        Toast.makeText(SignUp.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        finish();
+    }
+
+    private void notifyFailure(String message) {
+        loadingBar.dismiss();
+        Toast.makeText(SignUp.this,message, Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void createUserInfo(FirebaseUser user) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setBalance(0);
+        userInfo.setUid(user.getUid());
+        Log.d("SignUp", "createUserInfo: AutoCreate user info");
+
+        FirebaseFirestore.getInstance()
+                .collection("user_infos")
+                .document(user.getUid())
+                .set(userInfo)
+                .addOnSuccessListener(mPushUserInfoListener)
+                .addOnFailureListener(mPushUserInfoListener);
+
+    }
+
+    private DocumentPushResultListener mPushUserInfoListener = new DocumentPushResultListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+            notifyFailure(e.getMessage());
+        }
+
+        @Override
+        public void onSuccess(Void aVoid) {
+            notifyOnSuccess();
+        }
+    };
 
 }

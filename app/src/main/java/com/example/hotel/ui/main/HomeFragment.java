@@ -18,17 +18,20 @@ import android.widget.Toast;
 
 import com.example.hotel.R;
 import com.example.hotel.model.Hotel;
+import com.example.hotel.model.UserInfo;
 import com.example.hotel.ui.search.SearchActivity;
 import com.example.hotel.ui.detail.HotelDetailActivity;
 import com.example.hotel.ui.list_hotel.HotelAdapter;
+import com.example.hotel.util.DocumentGetResultListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +47,9 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
     SwipeRefreshLayout mSwipeRefresh;
 
     private HotelAdapter mAdapter;
+
+    private FirebaseUser mUser;
+    private UserInfo mUserInfo;
 
     @Nullable
     @Override
@@ -76,7 +82,10 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
     @Override
     public void onFavoriteChanged(Hotel hotel, int position) {
 
-        setFireBase(hotel,position);
+        updateFavorite(hotel,position);
+
+        updateUserInfoFavorite(hotel.getId());
+
 
         Activity activity = getActivity();
         if(activity instanceof MainActivity) {
@@ -84,6 +93,8 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
 
         }
     }
+
+
 
 
     @Override
@@ -94,7 +105,7 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
             startActivity(intent);
         }
     }
-    private void getFromFireBase() {
+    private void getHotelsFromFireBase() {
 
         FirebaseFirestore.getInstance()
                 .collection("hotels")
@@ -103,39 +114,70 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
                 .addOnFailureListener(this);
     }
 
+
     private void refreshData() {
         mSwipeRefresh.setRefreshing(true);
+        mResults[0] = NO_SET;
+        mResults[1] = NO_SET;
 
-        getFromFireBase();
+        getCurrentUserInfo();
+        getHotelsFromFireBase();
     }
 
-    private void  setFireBase(Hotel hotel,int position){
+    private void getCurrentUserInfo() {
+        mUser=FirebaseAuth.getInstance().getCurrentUser();
+        if(mUser==null)
+            Toast.makeText(getContext(), "Please sign in to use this feature!", Toast.LENGTH_SHORT).show();
+        else {
+            FirebaseFirestore.getInstance()
+                    .collection("user_infos")
+                    .document(mUser.getUid())
+                    .get()
+                    .addOnSuccessListener(mUserInfoListener)
+                    .addOnFailureListener(mUserInfoListener);
+        }
+    }
+
+    private DocumentGetResultListener mUserInfoListener = new DocumentGetResultListener(){
+
+        @Override
+        public void onSuccess(DocumentSnapshot documentSnapshot) {
+            if(documentSnapshot.exists()){
+
+                mUserInfo=documentSnapshot.toObject(UserInfo.class);
+                checkingResult(1,SUCCESS);
+            } else checkingResult(1,FAILURE);
+        }
+
+        @Override
+        public void onFailure(@NonNull Exception e) {
+            checkingResult(1,FAILURE);
+            Toast.makeText(getContext(),"Fail to get user info",Toast.LENGTH_SHORT).show();
+        }
+    };
+
+
+    private void updateFavorite(Hotel hotel, int position){
         FirebaseFirestore.getInstance()
                 .collection("hotels")
                 .document(hotel.getId())
                 .update("favorite",hotel.getFavorite());
 
+
     }
 
-    private void getSampleData() {
-        ArrayList<Hotel> data= new ArrayList<>();
-        Random rnd = new Random();
-        Hotel hotel = new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/147/147997361.jpg","Sky hotel",4,"Quận cam, TP HCM","0126493541","50 000 đ",true)
-                .addImages("https://q-cf.bstatic.com/images/hotel/max1024x768/134/134481018.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/161/161051644.jpg","https://r-cf.bstatic.com/images/hotel/max1024x768/161/161052022.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478560.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478936.jpg");
-
-        data.add(hotel);
-        data.add(new Hotel("https://ihg.scene7.com/is/image/ihg/holiday-inn-the-colony-4629618286-4x3", "Kaze hotel", 4, "Thủ Đức TP HCM", "6565659", "90 000 đ")
-                .addImages("https://q-cf.bstatic.com/images/hotel/max1024x768/134/134481018.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/161/161051644.jpg","https://r-cf.bstatic.com/images/hotel/max1024x768/161/161052022.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478560.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478936.jpg"));
-        data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/797/79726354.jpg","Kumo hotel",3,"Nha Trang","45454545","150 000 đ",true)
-                .addImages("https://q-cf.bstatic.com/images/hotel/max1024x768/134/134481018.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/161/161051644.jpg","https://r-cf.bstatic.com/images/hotel/max1024x768/161/161052022.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478560.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478936.jpg"));
-        data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/460/46080789.jpg","Vanish hotel",5," Bến Tre","25252525","125 000 đ",true)
-                .addImages("https://q-cf.bstatic.com/images/hotel/max1024x768/134/134481018.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/161/161051644.jpg","https://r-cf.bstatic.com/images/hotel/max1024x768/161/161052022.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478560.jpg","https://q-cf.bstatic.com/images/hotel/max1024x768/134/134478936.jpg"));;
-        for (int i = 0; i < 100; i++) {
-            data.add(new Hotel("https://q-ec.bstatic.com/images/hotel/max1024x768/797/79726354.jpg","Kumo hotel",rnd.nextInt(6),"Trà Vinh","35353535",rnd.nextInt(999)+"000 đ"));
-        }
-
-        mAdapter.setData(data);
+    private void updateUserInfoFavorite(String idHotel){
+        List<String> favors=mUserInfo.getFavors();
+        if(favors.contains(idHotel))
+            favors.remove(idHotel);
+        else
+            favors.add(idHotel);
+        FirebaseFirestore.getInstance()
+                .collection("user_infos")
+                .document(mUserInfo.getUid())
+                .update("favors",favors);
     }
+
 
     @BindView(R.id.search_panel) View mSearchPanel;
 
@@ -154,30 +196,64 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
 
     public void changeFavoriteThisHotel(Hotel hotel, int position) {
         //Toast.makeText(getContext(),"I am Home Fragment, do U want me to change favorite this hotel ?", Toast.LENGTH_SHORT).show();
+        updateUserInfoFavorite(hotel.getId());
 
-        getFromFireBase();
+        getHotelsFromFireBase();
         mAdapter.notifyItemChange(hotel);
 
     }
-
+    private List<Hotel> hotels;
     @Override
     public void onSuccess(QuerySnapshot querySnapshot) {
 
-
-        List<Hotel> hotels = querySnapshot.toObjects(Hotel.class);
-        mAdapter.setData(hotels);
-
-        mSwipeRefresh.setRefreshing(false);
-
-        Log.d(TAG,"Success !!!");
-
+        hotels = querySnapshot.toObjects(Hotel.class);
+        checkingResult(0,SUCCESS);
 
     }
 
     @Override
     public void onFailure(@NonNull Exception e) {
+        checkingResult(0,FAILURE);
         mSwipeRefresh.setRefreshing(false);
         Log.d(TAG,"Fail to load data from firebase");
         mAdapter.setData(null);
+    }
+
+    public static final int NO_SET = -1;
+    public static final int FAILURE = 0;
+    public static final int SUCCESS = 1;
+
+    private int[] mResults = new int[]{NO_SET,NO_SET};
+
+    private void checkingResult(int pos,int result) {
+        mResults[pos] = result;
+
+        if (mResults[0] != NO_SET && mResults[1] != NO_SET)  {
+
+            if (mResults[0] == FAILURE || mResults[1] == FAILURE) {
+                Toast.makeText(getContext(), "Xin lỗi, vui lòng thử lại!", Toast.LENGTH_LONG).show();
+                mSwipeRefresh.setRefreshing(false);
+            } else {
+                setUpHotels();
+            }
+        }
+    }
+
+    private void setUpHotels(){
+
+        mSwipeRefresh.setRefreshing(false);
+
+        List<String> favors = mUserInfo.getFavors();
+
+        for (Hotel hotel : hotels) {
+            if(favors.contains(hotel.getId()))
+                hotel.setFavorite(true);
+            else
+                hotel.setFavorite(false);
+            updateFavorite(hotel,0);
+        }
+
+        mAdapter.setData(hotels);
+        Log.d(TAG,"Success !!!");
     }
 }
