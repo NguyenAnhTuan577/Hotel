@@ -145,73 +145,73 @@ public class MapsActivity extends FragmentActivity
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-
-                List<LatLng> path = new ArrayList();
-                GeoApiContext context = new GeoApiContext.Builder()
-                        .apiKey("AIzaSyCtwWKOFjlQIGVrhQt1wH4whrkPCwqN9Fo")
-                        .build();
-                LatLng origin = myMarker.getPosition();
-                Double origin_latitude = origin.latitude, origin_longitude =origin.longitude;
-                String s1 = origin_latitude.toString() + "," + origin_latitude.toString();
-
-                LatLng des = marker.getPosition();
-                Double des_latitude = origin.latitude, des_longitude =origin.longitude;
-                String s2 = des_latitude.toString() + "," + des_longitude.toString();
-
-                DirectionsApiRequest req = DirectionsApi.getDirections(context, s1, s2);
-                Log.d("Mapactivity",s1 + s2);
-                try {
-                    DirectionsResult res = req.await();
-
-                    if (res.routes != null && res.routes.length > 0) {
-                        DirectionsRoute route = res.routes[0];
-
-                        if (route.legs !=null) {
-                            for(int i=0; i<route.legs.length; i++) {
-                                DirectionsLeg leg = route.legs[i];
-                                if (leg.steps != null) {
-                                    for (int j=0; j<leg.steps.length;j++){
-                                        DirectionsStep step = leg.steps[j];
-                                        if (step.steps != null && step.steps.length >0) {
-                                            for (int k=0; k<step.steps.length;k++){
-                                                DirectionsStep step1 = step.steps[k];
-                                                EncodedPolyline points1 = step1.polyline;
-                                                if (points1 != null) {
-                                                    //Decode polyline and add points to list of route coordinates
-                                                    List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
-                                                    for (com.google.maps.model.LatLng coord1 : coords1) {
-                                                        path.add(new LatLng(coord1.lat, coord1.lng));
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            EncodedPolyline points = step.polyline;
-                                            if (points != null) {
-                                                //Decode polyline and add points to list of route coordinates
-                                                List<com.google.maps.model.LatLng> coords = points.decodePath();
-                                                for (com.google.maps.model.LatLng coord : coords) {
-                                                    path.add(new LatLng(coord.lat, coord.lng));
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } catch(Exception ex) {
-                    Log.e(TAG, ex.getLocalizedMessage());
-                    Toast.makeText(MapsActivity.this, "Number request have reached to limitation", Toast.LENGTH_SHORT).show();
-                }
-                if (path.size() > 0) {
-                    PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(5);
-                    mMap.addPolyline(opts);
-                }
-            }
-        });
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            @Override
+//            public void onInfoWindowClick(Marker marker) {
+//
+//                List<LatLng> path = new ArrayList();
+//                GeoApiContext context = new GeoApiContext.Builder()
+//                        .apiKey("AIzaSyCtwWKOFjlQIGVrhQt1wH4whrkPCwqN9Fo")
+//                        .build();
+//                LatLng origin = myMarker.getPosition();
+//                Double origin_latitude = origin.latitude, origin_longitude =origin.longitude;
+//                String s1 = origin_latitude.toString() + "," + origin_latitude.toString();
+//
+//                LatLng des = marker.getPosition();
+//                Double des_latitude = origin.latitude, des_longitude =origin.longitude;
+//                String s2 = des_latitude.toString() + "," + des_longitude.toString();
+//
+//                DirectionsApiRequest req = DirectionsApi.getDirections(context, s1, s2);
+//                Log.d("Mapactivity",s1 + s2);
+//                try {
+//                    DirectionsResult res = req.await();
+//
+//                    if (res.routes != null && res.routes.length > 0) {
+//                        DirectionsRoute route = res.routes[0];
+//
+//                        if (route.legs !=null) {
+//                            for(int i=0; i<route.legs.length; i++) {
+//                                DirectionsLeg leg = route.legs[i];
+//                                if (leg.steps != null) {
+//                                    for (int j=0; j<leg.steps.length;j++){
+//                                        DirectionsStep step = leg.steps[j];
+//                                        if (step.steps != null && step.steps.length >0) {
+//                                            for (int k=0; k<step.steps.length;k++){
+//                                                DirectionsStep step1 = step.steps[k];
+//                                                EncodedPolyline points1 = step1.polyline;
+//                                                if (points1 != null) {
+//                                                    //Decode polyline and add points to list of route coordinates
+//                                                    List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
+//                                                    for (com.google.maps.model.LatLng coord1 : coords1) {
+//                                                        path.add(new LatLng(coord1.lat, coord1.lng));
+//                                                    }
+//                                                }
+//                                            }
+//                                        } else {
+//                                            EncodedPolyline points = step.polyline;
+//                                            if (points != null) {
+//                                                //Decode polyline and add points to list of route coordinates
+//                                                List<com.google.maps.model.LatLng> coords = points.decodePath();
+//                                                for (com.google.maps.model.LatLng coord : coords) {
+//                                                    path.add(new LatLng(coord.lat, coord.lng));
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                } catch(Exception ex) {
+//                    Log.e(TAG, ex.getLocalizedMessage());
+//                    Toast.makeText(MapsActivity.this, "Number request have reached to limitation", Toast.LENGTH_SHORT).show();
+//                }
+//                if (path.size() > 0) {
+//                    PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(5);
+//                    mMap.addPolyline(opts);
+//                }
+//            }
+//        });
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(60000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
