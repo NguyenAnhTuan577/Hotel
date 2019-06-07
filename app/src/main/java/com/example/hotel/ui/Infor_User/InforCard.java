@@ -1,4 +1,4 @@
-package com.example.hotel.Infor_User;
+package com.example.hotel.ui.Infor_User;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,17 +7,17 @@ import android.widget.TextView;
 
 import com.example.hotel.R;
 
-public class Notify extends AppCompatActivity {
-    TextView txtNotify;
+public class InforCard extends AppCompatActivity {
+    TextView txtBackInforCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notify);
+        setContentView(R.layout.activity_infor_card);
 
-        txtNotify=(TextView) findViewById(R.id.txtBackNotify);
+        txtBackInforCard=(TextView) findViewById(R.id.txtBackInforCard);
 
-        txtNotify.setOnClickListener(new View.OnClickListener() {
+        txtBackInforCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();

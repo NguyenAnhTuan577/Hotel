@@ -19,12 +19,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login_Register.SigninPhonenumber"></activity>
+        <activity android:name=".ui.Login_Register.SigninPhonenumber"></activity>
         <activity
             android:name=".ui.login.SignInPhoneNumber"
             android:label="@string/title_activity_sign_in_phone_number" />
-        <activity android:name=".Login_Register.SignUp" />
-        <activity android:name=".Login_Register.Login">
+        <activity android:name=".ui.Login_Register.SignUp" />
+        <activity android:name=".ui.Login_Register.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -33,13 +33,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MapsActivity" />
-        <activity android:name=".Infor_User.Help" />
-        <activity android:name=".Infor_User.SecurAccount" />
-        <activity android:name=".Infor_User.Notify" />
-        <activity android:name=".Infor_User.InforCard" />
-        <activity android:name=".Infor_User.History" />
-        <activity android:name=".Infor_User.Change_Infor" />
-        <activity android:name=".Infor_User.Change_Language" />
+        <activity android:name=".ui.Infor_User.Help" />
+        <activity android:name=".ui.Infor_User.SecurAccount" />
+        <activity android:name=".ui.Infor_User.Notify" />
+        <activity android:name=".ui.Infor_User.InforCard" />
+        <activity android:name=".ui.Infor_User.History" />
+        <activity android:name=".ui.Infor_User.Change_Infor" />
+        <activity android:name=".ui.Infor_User.Change_Language" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -52,6 +52,7 @@
             android:name=".ui.image_cover.CoverActivity"
             android:theme="@style/AppTheme.BlackStatus" />
         <activity android:name=".ui.oder.OrderActivity" />
+        <activity android:name=".ui.oder.PaymentActivity"/>
     </application>
 
 </manifest>

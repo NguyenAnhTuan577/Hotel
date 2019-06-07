@@ -1,4 +1,4 @@
-package com.example.hotel.Infor_User;
+package com.example.hotel.ui.Infor_User;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

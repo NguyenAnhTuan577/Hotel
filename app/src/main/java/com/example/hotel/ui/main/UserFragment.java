@@ -12,15 +12,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.hotel.Infor_User.Change_Infor;
-import com.example.hotel.Infor_User.Change_Language;
-import com.example.hotel.Infor_User.Help;
-import com.example.hotel.Infor_User.History;
-import com.example.hotel.Infor_User.InforCard;
-import com.example.hotel.Infor_User.Notify;
-import com.example.hotel.Login_Register.Login;
+import com.example.hotel.ui.Infor_User.Change_Infor;
+import com.example.hotel.ui.Infor_User.Change_Language;
+import com.example.hotel.ui.Infor_User.Help;
+import com.example.hotel.ui.Infor_User.History;
+import com.example.hotel.ui.Infor_User.InforCard;
+import com.example.hotel.ui.Infor_User.Notify;
+import com.example.hotel.ui.Login_Register.Login;
 import com.example.hotel.R;
-import com.example.hotel.Infor_User.SecurAccount;
+import com.example.hotel.ui.Infor_User.SecurAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     Button txtLanguage,txtHistory,txtInforCard,txtNotify,txtSecure,txtHelp,txtLogout;
@@ -95,6 +97,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 break;
             }
             case  R.id.txtLogout: {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if(user!=null)
+                    FirebaseAuth.getInstance().signOut();
+
                 Intent intent = new Intent(getContext(),Login.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
