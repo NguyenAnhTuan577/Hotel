@@ -44,13 +44,13 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:padding="5dp"
-            android:src="@drawable/luffy" />
+            android:src="@drawable/no_avatar" />
 
         <Button
             android:id="@+id/change_imgAvatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#F7F2F2"
+            android:background="@drawable/custom_button_login"
             android:text="Thay đổi"
             android:textAllCaps="false"
             android:textSize="20dp" />
@@ -69,73 +69,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="2"
+            android:textColor="#EF1111"
             android:text="Tên:"
             android:textSize="20dp"
             android:textStyle="bold" />
 
         <EditText
+            android:background="@drawable/custom_login_edittext"
             android:id="@+id/txtUseNameChange"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="8"
-            android:text="Nguyễn Thanh Tuấn"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="10"
-        android:layout_marginLeft="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Email:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-        <EditText
-            android:layout_weight="8"
-            android:id="@+id/txtEmailChange"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="tuanpenspinner@gmail.com"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="10"
-        android:layout_marginLeft="5dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Phone:"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-        <EditText
-            android:layout_weight="8"
-            android:id="@+id/txtPhoneChange"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="0369696969"
+            android:text=""
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -151,6 +97,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_button_login"
             android:text="Lưu"/>
 
     </LinearLayout>

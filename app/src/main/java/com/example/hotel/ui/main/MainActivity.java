@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.hotel.R;
 import com.example.hotel.model.Hotel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-
     final HomeFragment mHomeFragment = new HomeFragment();
     final FavoriteFragment mFavoriteFragment = new FavoriteFragment();
     final UserFragment mUserFragment = new UserFragment();

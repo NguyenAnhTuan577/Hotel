@@ -103,6 +103,7 @@ public class SignUp extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+
                             if (task.isSuccessful()&&task.getResult()!=null)
                                 createUserInfo(task.getResult().getUser());
                                 else if(task.getException()!=null) notifyFailure(task.getException().getMessage());

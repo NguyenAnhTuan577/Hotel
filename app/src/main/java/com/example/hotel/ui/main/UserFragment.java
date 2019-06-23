@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.hotel.ui.Infor_User.Change_Infor;
 import com.example.hotel.ui.Infor_User.Change_Language;
@@ -25,12 +26,30 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
+    FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
     Button txtLanguage,txtHistory,txtInforCard,txtNotify,txtSecure,txtHelp,txtLogout;
-    ImageView imgEditInfor;
+    ImageView imgEditInfor,profile_image;
+    TextView txtUseName;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_user,container,false);
+        txtUseName=(TextView) view.findViewById(R.id.txtUseName);
+        if(user.getDisplayName()==null)
+        {
+            txtUseName.setText(user.getUid());
+        }
+        else
+        {
+            txtUseName.setText(user.getDisplayName());
+        }
+
+
+        profile_image=(ImageView) view.findViewById(R.id.profile_image);
+
+        if(user.getPhotoUrl()==null) {
+            profile_image.setImageResource(R.drawable.no_avatar);
+        }
 
         imgEditInfor=(ImageView) view.findViewById(R.id.imgEditInfor);
         txtLanguage=(Button) view.findViewById(R.id.txtLanguage);
@@ -99,13 +118,15 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             case  R.id.txtLogout: {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                if(user!=null)
+                if(user!=null) {
                     FirebaseAuth.getInstance().signOut();
+                    getActivity().finish();
+                }
 
                 Intent intent = new Intent(getContext(),Login.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent);
-                getActivity().finish();
+
                 break;
             }
 

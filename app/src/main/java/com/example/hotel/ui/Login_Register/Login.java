@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
@@ -44,7 +45,15 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validate())
+                {
+                    loadingBar.setTitle("Đang đăng nhập");
+                    loadingBar.setMessage("Vui lòng đợi!");
+                    loadingBar.setCanceledOnTouchOutside(false);
+                    loadingBar.show();
                     Login();
+
+                }
+
             }
         });
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +70,20 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, forget_password.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void Init() {
+        txtForgotPassword = (TextView) findViewById(R.id.txtForgotPassword);
         txtUser = (EditText) findViewById(R.id.txtUser);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
         txtForgotPassword = (TextView) findViewById(R.id.txtForgotPassword);
@@ -95,11 +115,6 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            loadingBar.setTitle("Đang đăng nhập");
-                            loadingBar.setMessage("Vui lòng đợi!");
-                            loadingBar.setCanceledOnTouchOutside(false);
-                            loadingBar.show();
-
                             new Thread(new Runnable() {
                                 public void run() {
                                     Intent intent = new Intent(Login.this, MainActivity.class);
@@ -110,11 +125,11 @@ public class Login extends AppCompatActivity {
                             }).start();
 
                         } else {
+                            loadingBar.dismiss();
                             Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
     }
-
 }

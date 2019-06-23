@@ -58,6 +58,7 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
 
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -93,8 +94,6 @@ public class HomeFragment extends Fragment implements HotelAdapter.HotelCallBack
 
         }
     }
-
-
 
 
     @Override

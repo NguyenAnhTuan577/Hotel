@@ -50,7 +50,8 @@
             android:textSize="20dp"
             android:textStyle="bold" />
         <EditText
-            android:hint="OldPass"
+            android:background="@drawable/custom_login_edittext"
+            android:hint="old password"
             android:inputType="textPassword"
             android:layout_weight="6"
             android:id="@+id/txtPass"
@@ -58,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textStyle="bold" />
+             />
 
     </LinearLayout>
 
@@ -80,7 +81,8 @@
             android:textSize="20dp"
             android:textStyle="bold" />
         <EditText
-            android:hint="Newpass"
+            android:background="@drawable/custom_login_edittext"
+            android:hint="new password"
             android:inputType="textPassword"
             android:layout_weight="6"
             android:id="@+id/txtNewPass"
@@ -88,7 +90,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textStyle="bold" />
+           />
 
     </LinearLayout>
     <LinearLayout
@@ -109,7 +111,8 @@
             android:textSize="20dp"
             android:textStyle="bold" />
         <EditText
-            android:hint="Retype"
+            android:background="@drawable/custom_login_edittext"
+            android:hint="retype password"
             android:inputType="textPassword"
             android:layout_weight="6"
             android:id="@+id/txtRetypePass"
@@ -117,7 +120,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            />
 
     </LinearLayout>
     <LinearLayout
@@ -126,6 +129,7 @@
         android:layout_weight="1"
         android:orientation="vertical">
         <Button
+            android:background="@drawable/custom_button_login"
             android:id="@+id/SavePass"
             android:layout_gravity="center"
             android:layout_width="wrap_content"

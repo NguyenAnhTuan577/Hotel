@@ -40,7 +40,6 @@ public class CoverActivity extends AppCompatActivity {
     private CoverPagerAdapter mViewPagerAdapter;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
